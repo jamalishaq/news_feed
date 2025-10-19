@@ -16,9 +16,10 @@ const validate = (schema) => (req, res, next) => {
     } catch (error) {
         // If validation fails, 'error' will be a ZodError instance.
         if (error.name === 'ZodError') {
+            console.log('Validation error:', error.issues);
             
             // Transform the Zod error details into a cleaner, more readable format
-            const errors = error.errors.map(err => ({
+            const errors = error.issues.map((err) => ({
                 field: err.path.join('.'),
                 message: err.message,
             }));

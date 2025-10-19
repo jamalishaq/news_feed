@@ -1,4 +1,5 @@
-import db from '../../db/index.js';
+import postService from '../../services/postService.js';
+import { InternalServerError } from '../../utils/AppError.js';
 
 /**
  * Posts controller
@@ -24,14 +25,14 @@ import db from '../../db/index.js';
  * Success: 200 JSON [ { _id, title, content, createdAt, updatedAt, ... } ]
  * Failure: 500 JSON { error: 'Failed to fetch posts' }
  */
-export const getPosts = async (req, res) => {
+const getPosts = async (req, res, next) => {
   try {
-    const posts = await db.models.Post.find().sort({ createdAt: -1 }).lean();
+    const posts = await postService.listPosts();
     return res.json(posts);
   } catch (err) {
     // Log full error server-side for diagnostics, but return a safe message to clients
     console.error('Error fetching posts', err);
-    return res.status(500).json({ error: 'Failed to fetch posts' });
+    next(new InternalServerError())
   }
 };
 
@@ -44,14 +45,18 @@ export const getPosts = async (req, res) => {
  * Success: 201 JSON { created post }
  * Failure: 500 JSON { error: 'Failed to create post' }
  */
-export const createPost = async (req, res) => {
+const createPost = async (req, res) => {
   try {
     const { title, content } = req.body;
-    const post = new db.models.Post({ title, content });
-    const saved = await post.save();
+    const saved = await postService.createPost({ title, content });
     return res.status(201).json(saved);
   } catch (err) {
     console.error('Error creating post', err);
     return res.status(500).json({ error: 'Failed to create post' });
   }
+};
+
+export default {
+  getPosts,
+  createPost,
 };

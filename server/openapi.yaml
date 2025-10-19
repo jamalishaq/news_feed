@@ -1,0 +1,262 @@
+openapi: 3.1.0
+info:
+  title: News Feed API
+  version: 1.0.0
+  description: API for managing post feeds
+  author: Jamal
+path:
+  /posts:
+    get:
+      summary: Retrieve a list of posts
+      description: Get all posts from the feed
+      responses:
+        '200':
+          description: A list of posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: integer
+                      example: 1
+                    content:
+                      type: string
+                      example: "This is the content of the first post."
+                    createdAt:
+                      type: string
+                    updatedAt:
+                      type: string
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      summary: Create a new post
+      description: Add a new post to the feed
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  example: "This is the content of the new post."
+      responses:
+        '201':
+          description: Post created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /posts/{postId}:
+    get:
+      summary: Retrieve a specific post
+      description: Get details of a post by its ID
+      parameters:
+        $ref: '#/components/parameters/PostIdParam'
+      responses:
+        '200':
+          description: Post details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /users:
+    post:
+      summary: Create a new user
+      description: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: "john_doe"
+                email:
+                  type: string
+                  example: "
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  username:
+                    type: string
+                    example: "john_doe"
+        '400':
+          $ref: '#/components/responses/BadRequest
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /users/{userId}:
+    get:
+      summary: Retrieve a specific user
+      description: Get details of a user by their ID
+      parameters:
+        $ref: '#/components/parameters/UserIdParam'
+      responses:
+        '200':
+          description: User details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  username:
+                    type: string
+                    example: "john_doe"
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'  
+  /users/{userId}/posts:
+    get:
+      summary: Retrieve posts for a specific user
+      description: Get all posts made by a specific user
+      parameters:
+        $ref: '#/components/parameters/UserIdParam'
+      responses:
+        '200':
+          description: A list of posts for the specified user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    /login:
+      post:
+        summary: User login
+        description: Authenticate a user and initiate a session
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: "john_doe"
+                  password:
+                    type: string
+                    example: "securepassword123"
+        responses:
+          '200':
+            description: Login successful
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                      example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          '400':
+            $ref: '#/components/responses/BadRequest'
+          '500':
+            $ref: '#/components/responses/ServerError'
+
+components:
+  responses:
+    ServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    PostIdParam:
+      name: postId
+      in: path
+      required: true
+      schema:
+        type: integer
+      example: 1
+    UserIdParam:
+      name: userId
+      in: path
+      required: true
+      schema:
+        type: integer
+      example: 1
+  schemas:
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        content:
+          type: string
+          example: "This is the content of the post."
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "error"
+        statusCode:
+          type: integer
+          example: 404
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "Post not found."
+            code:
+              type: string
+              example: "POST_NOT_FOUND"
+            details:
+              type: string
+              example: "No post exists with the given ID."
+            timestamp:
+              type: string
+              format: date-time
+              example: "2024-01-01T12:00:00Z"
+            suggestion:
+              type: string
+              example: "Please check the post ID and try again."
+        requestId:
+          type: string
+          example: "req_1234567890abcdef"  
+      
