@@ -8,8 +8,7 @@ import { InternalServerError } from '../utils/AppError.js';
  * controllers and services free from ORM details and makes unit testing easier.
  */
 const findAll = async ({ sort = { createdAt: -1 } } = {}) => {
-  throw new InternalServerError()
-  // return Post.find().sort(sort).lean();
+  return Post.find().sort(sort).lean();
 };
 
 const create = async ({ title, content } = {}) => {

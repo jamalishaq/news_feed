@@ -20,7 +20,6 @@ export class InternalServerError extends AppError {
     message = "Server down at the moment, try again later.",
     suggestion = "Check your internet connection",
   } = {}) {
-    console.log("Internal server", code)
     super(code, details, message, suggestion, 500);
   }
 }

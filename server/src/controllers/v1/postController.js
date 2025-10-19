@@ -31,8 +31,8 @@ const getPosts = async (req, res, next) => {
     return res.json(posts);
   } catch (err) {
     // Log full error server-side for diagnostics, but return a safe message to clients
-    console.error('Error fetching posts', err);
-    next(new InternalServerError())
+    console.error('Error fetching posts \n', err);
+    next(err)
   }
 };
 

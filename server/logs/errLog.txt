@@ -1,0 +1,2 @@
+Timesamp: 2025-10-19T12:26:46.987Z | statusCode: 500 | message: Server down at the moment, try again later. | details: Something went wrong 
+Timesamp: 2025-10-19T12:27:29.281Z | statusCode: 500 | message: Server down at the moment, try again later. | details: Something went wrong 
