@@ -1,12 +1,50 @@
 import { useEffect, useState } from "react";
 import axios from "../../src/lib/api";
+import { useAuth } from "../../src/lib/auth";
+import { ThemeToggle } from "../../src/components/ThemeToggle";
+import { useNavigate } from "react-router";
 
 export function Welcome() {
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [localPosts, setLocalPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [authChecked, setAuthChecked] = useState(false);
+
+  // Check authentication status
+  useEffect(() => {
+    console.log('Welcome page - isAuthenticated:', isAuthenticated);
+    // Small delay to ensure auth context is properly initialized
+    const timer = setTimeout(() => {
+      setAuthChecked(true);
+      console.log('Auth check completed - isAuthenticated:', isAuthenticated);
+      if (!isAuthenticated) {
+        console.log('Redirecting to login...');
+        navigate('/login');
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [isAuthenticated, navigate]);
+
+  // Show loading while checking auth
+  if (!authChecked) {
+    return (
+      <main className="flex items-center justify-center pt-16 pb-8 px-4">
+        <div className="text-center">
+          <p className="text-gray-500">Loading...</p>
+        </div>
+      </main>
+    );
+  }
+
+  // Don't render anything if not authenticated
+  if (!isAuthenticated) {
+    return null;
+  }
 
   useEffect(() => {
     let mounted = true;
@@ -61,8 +99,21 @@ export function Welcome() {
     <main className="flex items-center justify-center pt-16 pb-8 px-4">
       <div className="w-full max-w-3xl bg-white/80 dark:bg-gray-900/70 backdrop-blur rounded-2xl shadow-lg p-8">
         <header className="flex flex-col items-center gap-3 mb-6">
-          <h1 className="text-3xl font-semibold">Posts</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Share something with the world</p>
+          <div className="flex items-center justify-between w-full">
+            <div className="flex flex-col items-center gap-3 flex-1">
+              <h1 className="text-3xl font-semibold">Posts</h1>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Share something with the world</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
+              <button
+                onClick={async () => await logout()}
+                className="inline-flex items-center gap-2 bg-red-600 text-white rounded-md px-4 py-2 hover:bg-red-700"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
         </header>
 
         <section className="mb-6">
