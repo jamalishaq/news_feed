@@ -1,3 +1,5 @@
+import { BadRequestError } from '../utils/AppError';
+
 /**
  * Creates an Express middleware function to validate a request body 
  * against a Zod schema.
@@ -16,20 +18,18 @@ const validate = (schema) => (req, res, next) => {
     } catch (error) {
         // If validation fails, 'error' will be a ZodError instance.
         if (error.name === 'ZodError') {
-            console.log('Validation error:', error.issues);
-            
             // Transform the Zod error details into a cleaner, more readable format
             const errors = error.issues.map((err) => ({
                 field: err.path.join('.'),
                 message: err.message,
             }));
             
-            // Return a 400 Bad Request response with the error details
-            return res.status(400).json({
-                status: 'error',
+            next(new BadRequestError({
+                code: "BAD_REQUEST",
                 message: 'Validation failed for request body.',
-                errors: errors,
-            });
+                details: errors,
+                suggestion: "Check reques body data"
+            }));
         }
 
         // For any other unexpected errors, pass them to the Express error handler

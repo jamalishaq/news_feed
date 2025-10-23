@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import userRepository from "../repositories/user.repositories.js";
 import jwt from "../utils/jwt.js";
+import { InternalServerError } from "../utils/AppError.js";
 
 const createUser = async ({ username, password }) => {
     try {
@@ -9,7 +10,7 @@ const createUser = async ({ username, password }) => {
         const user = await userRepository.createUser({ username, password: hashedPassword });
         return user;
     } catch (error) {
-        throw error;
+        throw new InternalServerError();
     }
 }
 
@@ -18,7 +19,7 @@ const findUserById = async (id) => {
         const user = await userRepository.findUserById(id);
         return user;    
     } catch (error) {
-        throw error;
+        throw new InternalServerError();
     }
 }
 
@@ -34,7 +35,7 @@ const login = async ({ username, password }) => {
         
         return [true, token];
     } catch (error) {
-        throw error;
+        throw new InternalServerError();
     }
 }
 

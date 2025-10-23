@@ -1,4 +1,5 @@
 import userService from "../../services/user.services.js";
+import { AuthenticationError } from "../../utils/AppError.js";
 
 const createUser = async (req, res, next) => {
     try {
@@ -28,7 +29,12 @@ const login = async (req, res, next) => {
         const [ isAuthenticated, token ] = await userService.login({ username, password });
         
         if (!isAuthenticated) {
-            return res.status(401).json({});
+            throw new AuthenticationError({
+                code: "AUTHENTICATION_FAILD",
+                details: "Failed to login",
+                message: "Invalid login credentials",
+                suggestion: ""
+            });
         }
 
         return res.status(200).json({ token });

@@ -24,14 +24,24 @@ export class InternalServerError extends AppError {
   }
 }
 
-class BadRequestError extends AppError {
-  constructor(code = "BAD_REQUEST", details, message, suggestion) {
+export class BadRequestError extends AppError {
+  constructor({
+    code = "BAD_REQUEST",
+    details = "Failed to process reques due to bad input",
+    message = "Invalid input",
+    suggestion = "Check the data sent",
+  } = {}) {
     super(code, details, message, suggestion, 400);
   }
 }
 
-class AuthenticationError extends AppError {
-  constructor(code = "AUTHENTICATION_FAILED", details, message, suggestion) {
+export class AuthenticationError extends AppError {
+  constructor({
+    code = "AUTHENTICATION_ERROR",
+    details = "Failed to authenticate",
+    message = "Invalid authentication credentials",
+    suggestion = "Check provided credentials",
+  } = {}) {
     super(code, details, message, suggestion, 401);
   }
 }
