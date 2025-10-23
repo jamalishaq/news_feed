@@ -5,11 +5,9 @@ import authRepositories from "../repositories/auth.repositories.js";
 
 const login = async ({ username, password }) => {
     try {
-            console.log("requess gottend")
         const user = await authRepositories.findUserByUsername(username);
-            console.log("fetch user")
         const passwordMatch = await bcrypt.compare(password, user.password);
-            console.log("compare password")
+        
         if (!user || !passwordMatch) {
             return [false, null];
         }
