@@ -1,4 +1,4 @@
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 import PostMongooseSchema from '../../schemas/postZodSchema.js';
 
 

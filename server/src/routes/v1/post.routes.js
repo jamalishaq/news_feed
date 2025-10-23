@@ -1,7 +1,7 @@
 import express from "express";
 import validate from "../../middlewares/validate.js"
 import { PostZodSchema } from "../../schemas/postZodSchema.js";
-import postController from "../../controllers/v1/postController.js";
+import postController from "../../controllers/v1/post.controllers.js";
 import generateRequestId from "../../middlewares/generateReqId.js";
 
 /**
@@ -16,7 +16,7 @@ import generateRequestId from "../../middlewares/generateReqId.js";
 const postsRoutes = express.Router();
 
 postsRoutes.use(generateRequestId);
-postsRoutes.route("/")
+postsRoutes.route("")
     .get(postController.getPosts)
     .post(validate(PostZodSchema), postController.createPost);
 

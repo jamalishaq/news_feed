@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const DB_URI = "mongodb+srv://jamal_node:jamal_toyin@mernapp.en03loo.mongodb.net/?retryWrites=true&w=majority&appName=MERNapp";
+const DB_URI = "mongodb+srv://jamal_node:jamal_toyin@mernapp.en03loo.mongodb.net/news_feed?retryWrites=true&w=majority&appName=MERNap";
 
 /**
  * Establishes and manages the MongoDB connection.

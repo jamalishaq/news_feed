@@ -19,7 +19,7 @@ const errorHandler = (err, req, res, next) => {
     requestId: req.requestId,
   };
 
-  return res.status(statusCode).json(errorResponse);
+  return res.status(500).json(errorResponse);
 };
 
 export default errorHandler;

@@ -1,4 +1,4 @@
-import postService from '../../services/postService.js';
+import postService from '../../services/post.services.js';
 import { InternalServerError } from '../../utils/AppError.js';
 
 /**
@@ -30,8 +30,6 @@ const getPosts = async (req, res, next) => {
     const posts = await postService.listPosts();
     return res.json(posts);
   } catch (err) {
-    // Log full error server-side for diagnostics, but return a safe message to clients
-    console.error('Error fetching posts \n', err);
     next(err)
   }
 };
@@ -45,14 +43,13 @@ const getPosts = async (req, res, next) => {
  * Success: 201 JSON { created post }
  * Failure: 500 JSON { error: 'Failed to create post' }
  */
-const createPost = async (req, res) => {
+const createPost = async (req, res, next) => {
   try {
-    const { title, content } = req.body;
-    const saved = await postService.createPost({ title, content });
+    const { content } = req.body;
+    const saved = await postService.createPost({ content });
     return res.status(201).json(saved);
   } catch (err) {
-    console.error('Error creating post', err);
-    return res.status(500).json({ error: 'Failed to create post' });
+    next(err);
   }
 };
 

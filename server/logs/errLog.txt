@@ -1,2 +1,17 @@
 Timesamp: 2025-10-19T12:26:46.987Z | statusCode: 500 | message: Server down at the moment, try again later. | details: Something went wrong 
 Timesamp: 2025-10-19T12:27:29.281Z | statusCode: 500 | message: Server down at the moment, try again later. | details: Something went wrong 
+Timestamp: 2025-10-23T12:13:25.001Z | statusCode: undefined | message: Post.finds is not a function | details: undefined 
+Timestamp: 2025-10-23T12:19:05.698Z | statusCode: undefined | message: Post.finds is not a function | details: undefined 
+Timestamp: 2025-10-23T12:20:19.460Z | statusCode: undefined | message: Post.finds is not a function | details: undefined 
+Timestamp: 2025-10-23T12:35:41.099Z | statusCode: undefined | message: post.saves is not a function | details: undefined 
+Timestamp: 2025-10-23T12:45:50.583Z | statusCode: undefined | message: post.saves is not a function | details: undefined 
+Timestamp: 2025-10-23T13:48:04.285Z | statusCode: undefined | message: Cast to ObjectId failed for value "{}" (type Object) at path "_id" for model "User" | details: undefined 
+Timestamp: 2025-10-23T13:51:34.351Z | statusCode: undefined | message: Cast to ObjectId failed for value "{ id: '45' }" (type Object) at path "_id" for model "User" | details: undefined 
+Timestamp: 2025-10-23T13:52:06.147Z | statusCode: undefined | message: Cast to ObjectId failed for value "45" (type string) at path "_id" for model "User" | details: undefined 
+Timestamp: 2025-10-23T13:52:09.942Z | statusCode: undefined | message: Cast to ObjectId failed for value "45" (type string) at path "_id" for model "User" | details: undefined 
+Timestamp: 2025-10-23T13:52:32.823Z | statusCode: undefined | message: Cast to ObjectId failed for value "45" (type string) at path "_id" for model "User" | details: undefined 
+Timestamp: 2025-10-23T13:53:56.232Z | statusCode: undefined | message: Cast to ObjectId failed for value "45" (type string) at path "_id" for model "User" | details: undefined 
+Timestamp: 2025-10-23T13:54:24.910Z | statusCode: undefined | message: Cast to ObjectId failed for value "45" (type string) at path "_id" for model "User" | details: undefined 
+Timestamp: 2025-10-23T13:55:25.186Z | statusCode: undefined | message: Cast to ObjectId failed for value "45" (type string) at path "_id" for model "User" | details: undefined 
+Timestamp: 2025-10-23T13:57:21.047Z | statusCode: undefined | message: data and salt arguments required | details: undefined 
+Timestamp: 2025-10-23T13:58:08.245Z | statusCode: undefined | message: Cast to ObjectId failed for value "3456bb889124e9c74c85" (type string) at path "_id" for model "User" | details: undefined 

@@ -1,5 +1,4 @@
 import Post from '../db/models/Post.js';
-import { InternalServerError } from '../utils/AppError.js';
 
 /**
  * Post repository
@@ -7,12 +6,12 @@ import { InternalServerError } from '../utils/AppError.js';
  * Encapsulates direct data access (Mongoose) for Post documents. This keeps
  * controllers and services free from ORM details and makes unit testing easier.
  */
-const findAll = async ({ sort = { createdAt: -1 } } = {}) => {
-  return Post.find().sort(sort).lean();
+const findAll = ({ sort = { createdAt: -1 } } = {}) => {
+    return Post.find().sort(sort).lean(); 
 };
 
-const create = async ({ title, content } = {}) => {
-  const post = new Post({ title, content });
+const create = ({ content } = {}) => {
+  const post = new Post({ content });
   return post.save();
 };
 
