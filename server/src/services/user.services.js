@@ -1,13 +1,12 @@
 import bcrypt from "bcrypt";
-import userRepository from "../repositories/user.repositories.js";
-import jwt from "../utils/jwt.js";
+import userRepositories from "../repositories/user.repositories.js";
 import { InternalServerError } from "../utils/AppError.js";
 
 const createUser = async ({ username, password }) => {
     try {
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
-        const user = await userRepository.createUser({ username, password: hashedPassword });
+        const user = await userRepositories.createUser({ username, password: hashedPassword });
         return user;
     } catch (error) {
         throw new InternalServerError();
@@ -16,24 +15,8 @@ const createUser = async ({ username, password }) => {
 
 const findUserById = async (id) => {
     try {
-        const user = await userRepository.findUserById(id);
+        const user = await userRepositories.findUserById(id);
         return user;    
-    } catch (error) {
-        throw new InternalServerError();
-    }
-}
-
-const login = async ({ username, password }) => {
-    try {
-        const user = await userRepository.findUserByUsername(username);
-        const passwordMatch = await bcrypt.compare(password, user.password);
-        if (!user || !passwordMatch) {
-            return [false, null];
-        }
-        
-        const token = await jwt.generateToken({username, password});
-        
-        return [true, token];
     } catch (error) {
         throw new InternalServerError();
     }
@@ -42,5 +25,4 @@ const login = async ({ username, password }) => {
 export default {
     createUser, 
     findUserById,
-    login,
 }

@@ -9,12 +9,9 @@ const findUserById = (id) => {
     return User.findById(id);
 }
 
-const findUserByUsername = (username) => {
-    return User.findOne({ username });
-}
+
 
 export default {
     createUser,
     findUserById,
-    findUserByUsername
 }

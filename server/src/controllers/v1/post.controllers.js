@@ -1,4 +1,4 @@
-import postService from '../../services/post.services.js';
+import postServices from '../../services/post.services.js';
 import { InternalServerError } from '../../utils/AppError.js';
 
 /**
@@ -27,7 +27,7 @@ import { InternalServerError } from '../../utils/AppError.js';
  */
 const getPosts = async (req, res, next) => {
   try {
-    const posts = await postService.listPosts();
+    const posts = await postServices.listPosts();
     return res.json(posts);
   } catch (err) {
     next(err)
@@ -46,7 +46,7 @@ const getPosts = async (req, res, next) => {
 const createPost = async (req, res, next) => {
   try {
     const { content } = req.body;
-    const saved = await postService.createPost({ content });
+    const saved = await postServices.createPost({ content });
     return res.status(201).json(saved);
   } catch (err) {
     next(err);

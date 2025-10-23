@@ -1,4 +1,4 @@
-import postRepository from '../repositories/post.repositories.js';
+import postRepositories from '../repositories/post.repositories.js';
 
 /**
  * Post service
@@ -8,7 +8,7 @@ import postRepository from '../repositories/post.repositories.js';
  */
 const listPosts = async () => {
   try {
-    const posts = await postRepository.findAll();
+    const posts = await postRepositories.findAll();
     return posts;   
   } catch (error) {
     throw error;
@@ -17,7 +17,7 @@ const listPosts = async () => {
 
 const createPost = async ({ content }) => {
   try {
-    const post = await postRepository.create({ content });
+    const post = await postRepositories.create({ content });
     return post;
   } catch (error) {
     throw error;

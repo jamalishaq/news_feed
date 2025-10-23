@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-
-const DB_URI = "mongodb+srv://jamal_node:jamal_toyin@mernapp.en03loo.mongodb.net/news_feed?retryWrites=true&w=majority&appName=MERNap";
+import dotenv from "dotenv";
+dotenv.config();
 
 /**
  * Establishes and manages the MongoDB connection.
@@ -8,7 +8,7 @@ const DB_URI = "mongodb+srv://jamal_node:jamal_toyin@mernapp.en03loo.mongodb.net
  */
 const connectDB = async () => {
     try {
-        await mongoose.connect(DB_URI, {
+        await mongoose.connect(process.env.DB_URI, {
             serverSelectionTimeoutMS: 5000, 
             socketTimeoutMS: 45000, 
         });

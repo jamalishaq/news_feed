@@ -1,4 +1,4 @@
-import { BadRequestError } from '../utils/AppError';
+import { BadRequestError } from '../utils/AppError.js';
 
 /**
  * Creates an Express middleware function to validate a request body 

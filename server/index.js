@@ -1,12 +1,14 @@
 import app from "./src/app.js";
 import db from "./src/db/index.js";
+import dotenv from "dotenv"
+dotenv.config();
 
 async function startServer() {
     try {
         await db.connect(); 
         
         // Only start the server if the connection succeeds.
-        app.listen(3000, () => {
+        app.listen(process.env.PORT || 3000, () => {
             console.log("Server successfully connected to DB and listening on port 3000");
         });
 
