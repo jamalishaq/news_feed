@@ -14,10 +14,9 @@ export function Welcome() {
   const [error, setError] = useState<string | null>(null);
   const [authChecked, setAuthChecked] = useState(false);
 
-  // Check authentication status
+  // 1. Check authentication status
   useEffect(() => {
     console.log('Welcome page - isAuthenticated:', isAuthenticated);
-    // Small delay to ensure auth context is properly initialized
     const timer = setTimeout(() => {
       setAuthChecked(true);
       console.log('Auth check completed - isAuthenticated:', isAuthenticated);
@@ -28,25 +27,15 @@ export function Welcome() {
     }, 100);
 
     return () => clearTimeout(timer);
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate]); // This is the first useEffect
 
-  // Show loading while checking auth
-  if (!authChecked) {
-    return (
-      <main className="flex items-center justify-center pt-16 pb-8 px-4">
-        <div className="text-center">
-          <p className="text-gray-500">Loading...</p>
-        </div>
-      </main>
-    );
-  }
+  // 2. Fetch posts (The previously conditional hook - now unconditional)
+  // The logic inside the hook is conditional, but the hook call itself is not.
+  useEffect(() => { // This is now the second useEffect, called unconditionally
+    if (!isAuthenticated) {
+      return; // Skip fetching if not authenticated
+    }
 
-  // Don't render anything if not authenticated
-  if (!isAuthenticated) {
-    return null;
-  }
-
-  useEffect(() => {
     let mounted = true;
     setLoading(true);
     axios
@@ -59,16 +48,35 @@ export function Welcome() {
         if (mounted) setError('Failed to load posts');
       })
       .finally(() => mounted && setLoading(false));
+      
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [isAuthenticated]); // Added isAuthenticated to re-run when auth status changes
+
+  // --- Early returns for UI must come AFTER all hooks ---
+  
+  // Show loading while checking auth
+  if (!authChecked) {
+    return (
+      <main className="flex items-center justify-center pt-16 pb-8 px-4">
+        <div className="text-center">
+          <p className="text-gray-500">Loading...</p>
+        </div>
+      </main>
+    );
+  }
+
+  // Don't render anything if not authenticated (should redirect, but this is a fallback)
+  if (!isAuthenticated) {
+    return null;
+  }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!title.trim() && !content.trim()) return;
     const newPost: Post = {
-      id: Date.now(),
+      _id: Date.now(),
       title: title.trim() || "Untitled",
       content: content.trim(),
     };
@@ -83,7 +91,7 @@ export function Welcome() {
       .then((res) => {
         // replace optimistic item (matched by id) with server-saved one (has real id)
         setLocalPosts((prev) => {
-          const withoutOptimistic = prev.filter((p) => p.id !== newPost.id);
+          const withoutOptimistic = prev.filter((p) => p._id !== newPost._id);
           return [res.data, ...withoutOptimistic];
         });
       })
@@ -91,10 +99,10 @@ export function Welcome() {
         console.error('Failed to save post', err);
         setError('Failed to save post');
         // remove optimistic post
-        setLocalPosts((prev) => prev.filter((p) => p.id !== newPost.id));
+        setLocalPosts((prev) => prev.filter((p) => p._id !== newPost._id));
       });
   }
-
+  console.log(localPosts)
   return (
     <main className="flex items-center justify-center pt-16 pb-8 px-4">
       <div className="w-full max-w-3xl bg-white/80 dark:bg-gray-900/70 backdrop-blur rounded-2xl shadow-lg p-8">
@@ -153,7 +161,7 @@ export function Welcome() {
             <ul className="flex flex-col gap-4">
               {localPosts.map((post) => (
                 <li
-                  key={post.id}
+                  key={post._id}
                   className="p-4 rounded-lg border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800"
                 >
                   <h2 className="text-lg font-medium">{post.title}</h2>
@@ -169,7 +177,7 @@ export function Welcome() {
 }
 
 type Post = {
-  id: number;
+  _id: number;
   title: string;
   content: string;
 };
