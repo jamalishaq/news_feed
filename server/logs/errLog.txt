@@ -20,3 +20,30 @@ Timestamp: 2025-10-23T19:10:18.746Z | statusCode: 500 | message: Server down at 
 Timestamp: 2025-10-23T19:11:09.459Z | statusCode: 500 | message: Server down at the moment, try again later. | details: Something went wrong 
 Timestamp: 2025-10-23T19:12:07.077Z | statusCode: 500 | message: Server down at the moment, try again later. | details: Something went wrong 
 Timestamp: 2025-10-23T19:14:07.278Z | statusCode: 500 | message: Server down at the moment, try again later. | details: Something went wrong 
+Timestamp: 2025-10-24T11:15:03.349Z | statusCode: undefined | message: Cannot read properties of undefined (reading 'refreshToken') | details: undefined 
+Timestamp: 2025-10-24T11:18:35.730Z | statusCode: undefined | message: Cannot read properties of undefined (reading 'refreshToken') | details: undefined 
+Timestamp: 2025-10-24T11:21:25.207Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T11:31:11.812Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T11:33:10.596Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T11:34:23.841Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T11:48:14.997Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T11:51:15.815Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T11:57:28.821Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T11:58:07.072Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T12:00:28.365Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T12:01:06.707Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T12:01:47.605Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T12:03:22.474Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T12:06:11.323Z | statusCode: 500 | message: Server down at the moment, try again later. | details: Something went wrong 
+Timestamp: 2025-10-24T12:06:13.335Z | statusCode: 500 | message: Server down at the moment, try again later. | details: Something went wrong 
+Timestamp: 2025-10-24T12:06:20.247Z | statusCode: 500 | message: Server down at the moment, try again later. | details: Something went wrong 
+Timestamp: 2025-10-24T12:06:29.037Z | statusCode: 500 | message: Server down at the moment, try again later. | details: Something went wrong 
+Timestamp: 2025-10-24T12:06:46.511Z | statusCode: 500 | message: Server down at the moment, try again later. | details: Something went wrong 
+Timestamp: 2025-10-24T12:08:49.032Z | statusCode: 500 | message: Server down at the moment, try again later. | details: Something went wrong 
+Timestamp: 2025-10-24T12:08:58.255Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T12:09:50.223Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T12:10:37.690Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T12:13:08.226Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T12:14:03.750Z | statusCode: undefined | message: console is not a function | details: undefined 
+Timestamp: 2025-10-24T12:14:19.383Z | statusCode: 401 | message: Invalid login credentials | details: Failed to login 
+Timestamp: 2025-10-24T12:14:26.629Z | statusCode: undefined | message: console is not a function | details: undefined 

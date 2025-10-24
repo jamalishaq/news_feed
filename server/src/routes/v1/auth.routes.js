@@ -6,10 +6,10 @@ const authRouter = express.Router();
 authRouter.route("/login")
     .post(authControllers.login)
 
-// authRouter.route("/refresh-token")
-//     .post(authControllers.refreshToken)
+authRouter.route("/refresh-token")
+    .post(authControllers.refreshToken)
 
-// authRouter.route("/logout")
-//     .post(authControllers.logout)
+authRouter.route("/logout")
+    .post(authControllers.logout)
 
 export default authRouter;

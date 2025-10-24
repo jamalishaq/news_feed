@@ -33,7 +33,7 @@ const login = async (req, res, next) => {
 
 const refreshToken = async (req, res, next) => {
   try {
-    const refreshToken = res.cookies.refreshToken;
+    const refreshToken = req.cookies.refreshToken;
     if (!refreshToken) {
       throw new AuthenticationError({
         code: "AUTHENTICATION_FAILD",
@@ -65,7 +65,7 @@ const logout = (req, res, next) => {
     sameSite: "Lax",
   });
   
-  return res.status(204).send();
+  return res.status(204).send("ahsh");
 };
 
 export default {
